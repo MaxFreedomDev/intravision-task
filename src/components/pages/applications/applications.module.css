@@ -1,0 +1,9 @@
+
+.button {
+    display: flex;
+    padding: 23px 0 23px 262px;
+}
+.button button {
+    width: 180px;
+    height: 40px;
+}

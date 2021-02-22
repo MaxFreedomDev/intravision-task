@@ -1,6 +1,7 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Redirect, Route, Switch } from "react-router-dom";
 import { publicRoutes } from "../routes";
+import { APPLICATIONS_ROUTE } from "../utils/const";
 
 const AppRouter = () => {
   return (
@@ -8,6 +9,7 @@ const AppRouter = () => {
       {publicRoutes.map(({ path, Component }) => (
         <Route path={path} component={Component} key={path} />
       ))}
+      <Redirect to={APPLICATIONS_ROUTE} />
     </Switch>
   );
 };
