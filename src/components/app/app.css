@@ -11,5 +11,5 @@ body {
     height: 100vh;
 }
 .app_content {
-    width: 100%;
+    width: calc(100% - 95px);
 }

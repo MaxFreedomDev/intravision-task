@@ -17,7 +17,7 @@ export const getTasks = () => (dispatch) => {
   apiService
     .getTasksRequest()
     .then((tasks) => {
-      dispatch(tasksRequest(tasks));
+      dispatch(tasksRequest(tasks.value));
     })
     .catch((err) => {
       console.log(err);

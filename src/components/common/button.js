@@ -19,11 +19,12 @@ const useStyles = makeStyles(() => ({
 }));
 
 export default function Button(props) {
-  const { text, size, color, variant, onClick, ...other } = props;
+  const { text, size, color, variant, onClick, type, ...other } = props;
   const classes = useStyles();
 
   return (
     <MuiButton
+      type={type}
       variant={variant || "contained"}
       size={size || "large"}
       onClick={onClick}

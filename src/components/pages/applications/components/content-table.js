@@ -3,6 +3,8 @@ import useTable from "../../../common/use-table";
 import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
+import { useSelector } from "react-redux";
+import { makeStyles } from "@material-ui/core";
 
 const headCells = [
   {
@@ -11,39 +13,39 @@ const headCells = [
     label: "ID",
   },
   { id: "name", disablePadding: false, label: "Название" },
-  { id: "status", disablePadding: false, label: "Статус" },
-  { id: "executor", disablePadding: false, label: "Исполнитель" },
+  { id: "statusName", disablePadding: false, label: "Статус" },
+  { id: "executorName", disablePadding: false, label: "Исполнитель" },
 ];
 
-const items = [
-  {
-    id: 1,
-    name: "Тра лал лала лалла",
-    status: "открыта",
-    executor: "Андрей Менеджеров",
+const useStyles = makeStyles(() => ({
+  TableRow: {
+    "&:hover": {
+      backgroundColor: "#fafafa",
+      cursor: "pointer",
+    },
   },
-  {
-    id: 2,
-    name: "Ти лал ла лала",
-    status: "закрыта",
-    executor: "Иван Менеджеров",
+  nameCell: {
+    maxWidth: 380,
+    maxHeight: 40,
+    overflow: "hidden",
   },
-  {
-    id: 3,
-    name: "Куку реку",
-    status: "в работе",
-    executor: "Олег Менеджеров",
+  statusName: {
+    fontSize: 12,
+    maxWidth: 100,
   },
-];
+}));
 
-const ContentTable = () => {
+const ContentTable = ({ setSelectedTask }) => {
+  const classes = useStyles();
+  const { tasks } = useSelector((state) => state.tasks);
+  const { priorities, statuses } = useSelector((state) => state.enums);
   const [filterFn, setFilterFn] = useState({
-    fn: (items) => {
-      return items;
+    fn: (tasks) => {
+      return tasks;
     },
   });
   const { TblContainer, TblHead, recordsAfterPagingAndSorting } = useTable(
-    items,
+    tasks,
     headCells,
     filterFn
   );
@@ -55,11 +57,17 @@ const ContentTable = () => {
         <TblHead />
         <TableBody>
           {recordsAfterPagingAndSorting().map((row) => (
-            <TableRow key={row.id}>
+            <TableRow
+              key={row.id}
+              onClick={() => setSelectedTask(row.id)}
+              className={classes.TableRow}
+            >
               <TableCell>{row.id}</TableCell>
-              <TableCell>{row.name} $</TableCell>
-              <TableCell>{row.status}</TableCell>
-              <TableCell>{row.executor}</TableCell>
+              <TableCell className={classes.nameCell}>{row.name}</TableCell>
+              <TableCell>
+                <div className={classes.statusName}>{row.statusName}</div>
+              </TableCell>
+              <TableCell>{row.executorName}</TableCell>
             </TableRow>
           ))}
         </TableBody>

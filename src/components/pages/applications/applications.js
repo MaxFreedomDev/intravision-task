@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import SearchPanel from "./components/search-panel";
 import ContentTable from "./components/content-table";
 import Button from "../../common/button";
 import { useActions } from "../../../hooks/use-action";
+import ApplicationCreate from "./components/application-create";
 
 import styles from "./applications.module.css";
-import { useSelector } from "react-redux";
 
 const Applications = () => {
-  const { getPriorities, getStatuses } = useActions();
-  const { priorities, statuses } = useSelector((state) => state.enums);
-
-  console.log("priorities:", priorities, "statuses:", statuses);
+  const { getPriorities, getStatuses, getTasks } = useActions();
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     getPriorities();
     getStatuses();
+    getTasks();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -23,9 +23,14 @@ const Applications = () => {
     <div>
       <SearchPanel />
       <div className={styles.button}>
-        <Button text="Создать заявку" />
+        <Button text="Создать заявку" onClick={() => setOpen(true)} />
       </div>
-      <ContentTable />
+      <ContentTable setSelectedTask={setSelectedTask} />
+      {open && (
+        <div className={styles.drawer}>
+          <ApplicationCreate setOpen={setOpen} />
+        </div>
+      )}
     </div>
   );
 };
