@@ -9,6 +9,7 @@ import Box from "@material-ui/core/Box";
 import { ReactComponent as Calendar } from "../../../../icons/calendar.svg";
 import moment from "moment";
 import "moment/locale/ru";
+import Loader from "../../../loader/loader";
 moment.locale("ru");
 
 const styles = () => ({
@@ -205,7 +206,7 @@ const ApplicationChange = ({
   };
 
   if (!task) {
-    return <h1>Loading...</h1>;
+    return <Loader />;
   }
 
   return (
