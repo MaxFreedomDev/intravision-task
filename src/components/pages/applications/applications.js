@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import SearchPanel from "./components/search-panel";
 import ContentTable from "./components/content-table";
 import Button from "../../common/button";
 import { useActions } from "../../../hooks/use-action";
 import ApplicationCreate from "./components/application-create";
 import ApplicationChange from "./components/application-change";
+import { useSelector } from "react-redux";
 
 import styles from "./applications.module.css";
-import { useSelector } from "react-redux";
 
 const Applications = () => {
   const { getPriorities, getStatuses, getTasks, getUsers } = useActions();
@@ -25,15 +25,21 @@ const Applications = () => {
     setSelectedTask(id);
   };
 
-  useEffect(async () => {
+  const memoizedInitialRequests = useCallback(async () => {
     await getPriorities();
     await getStatuses();
     await getUsers();
     await getTasks();
+  }, []);
+
+  useEffect(() => {
+    memoizedInitialRequests();
+  }, []);
+
+  useEffect(() => {
     if (taskId) {
       setOpen(!open);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [taskId]);
 
   return (

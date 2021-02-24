@@ -5,7 +5,7 @@ import {
   CLIENTS_ROUTE,
   CUSTOMIZATION_ROUTE,
   EMPLOYEES_ROUTE,
-} from "./utils/const";
+} from "./utils/constants";
 import Base from "./components/pages/base";
 import Applications from "./components/pages/applications/applications";
 import Employees from "./components/pages/employees";

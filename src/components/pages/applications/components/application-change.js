@@ -71,6 +71,7 @@ const styles = (theme) => ({
       padding: 0,
       alignItems: "center",
       width: "100%",
+      border: "none",
     },
   },
   textarea: {
@@ -191,7 +192,6 @@ const ApplicationChange = ({
 
   useEffect(() => {
     getTask(selectedTask);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTask]);
 
   const onClose = () => {
@@ -262,25 +262,27 @@ const ApplicationChange = ({
             className={classes.btn}
             onClick={addComment}
           />
-          <div className={classes.commentsWrapper}>
-            {task.lifetimeItems.map((item) => (
-              <Box display="flex" key={item.id} mt={1}>
-                <Avatar />
-                <div className={classes.commentContainer}>
-                  <span className={classes.commentItemName}>
-                    {item.userName}
-                  </span>
-                  <span className={classes.commentItemDate}>
-                    {moment(item.createdAt).format("DD MMMM, HH:mm ")}
-                    прокомментировал
-                  </span>
-                  {item.comment && (
-                    <p className={classes.comment}>{item.comment}</p>
-                  )}
-                </div>
-              </Box>
-            ))}
-          </div>
+          {task.lifetimeItems.length > 0 && (
+            <div className={classes.commentsWrapper}>
+              {task.lifetimeItems.map((item) => (
+                <Box display="flex" key={item.id} mt={1}>
+                  <Avatar />
+                  <div className={classes.commentContainer}>
+                    <span className={classes.commentItemName}>
+                      {item.userName}
+                    </span>
+                    <span className={classes.commentItemDate}>
+                      {moment(item.createdAt).format("DD MMMM, HH:mm ")}
+                      прокомментировал
+                    </span>
+                    {item.comment && (
+                      <p className={classes.comment}>{item.comment}</p>
+                    )}
+                  </div>
+                </Box>
+              ))}
+            </div>
+          )}
         </div>
         <div className={classes.rightContent}>
           <Box

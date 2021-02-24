@@ -44,12 +44,7 @@ const ErrorBoundry = (props) => {
           <DialogContentText>{error}</DialogContentText>
         </DialogContent>
         <DialogActions className={classes.actions}>
-          <Button
-            onClick={handleClose}
-            autoFocus
-            text="ОК"
-            className={classes.btn}
-          />
+          <Button onClick={handleClose} text="ОК" className={classes.btn} />
         </DialogActions>
       </Dialog>
       {props.children}

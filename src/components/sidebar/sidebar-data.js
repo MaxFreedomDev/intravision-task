@@ -12,7 +12,7 @@ import {
   CLIENTS_ROUTE,
   CUSTOMIZATION_ROUTE,
   EMPLOYEES_ROUTE,
-} from "../../utils/const";
+} from "../../utils/constants";
 
 export const SidebarData = [
   {
