@@ -25,11 +25,11 @@ const Applications = () => {
     setSelectedTask(id);
   };
 
-  useEffect(() => {
-    getPriorities();
-    getStatuses();
-    getUsers();
-    getTasks();
+  useEffect(async () => {
+    await getPriorities();
+    await getStatuses();
+    await getUsers();
+    await getTasks();
     if (taskId) {
       setOpen(!open);
     }
