@@ -41,10 +41,6 @@ const styles = () => ({
   titleName: {
     fontSize: 16,
     fontWeight: 300,
-    /*    display: "-webkit-box",
-    "-webkit-box-orient": "vertical",
-    overflow: "hidden",
-    "-webkit-line-clamp": 2,*/
   },
   content: {
     display: "flex",

@@ -41,8 +41,7 @@ body option {
 .app {
     display: flex;
     height: calc(100vh);
-    overflow-x: hidden;
 }
 .app_content {
-    width: calc(100% - 95px);
+    width: calc(100% - 112px);
 }

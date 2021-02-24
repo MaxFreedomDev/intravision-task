@@ -37,7 +37,7 @@ const Applications = () => {
   }, [taskId]);
 
   return (
-    <div>
+    <div style={{ height: "100%" }}>
       <SearchPanel />
       <div className={styles.button}>
         <Button text="Создать заявку" onClick={selectCreate} />

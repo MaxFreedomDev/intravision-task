@@ -15,4 +15,5 @@
     height: calc(100% - 65px);
     width: 60%;
     overflow: hidden;
+    z-index: 100;
 }

@@ -62,8 +62,8 @@ export const updateTask = (payload) => (dispatch) => {
   apiService
     .updateTask(payload)
     .then(() => {
-      dispatch(getTasks);
       dispatch(getTask(payload.id));
+      dispatch(getTasks());
     })
     .catch((err) => {
       dispatch(setError(err.response.data.title));

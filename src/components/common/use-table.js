@@ -11,10 +11,22 @@ import {
 const useStyles = makeStyles(() => ({
   table: {
     "& thead th": {
-      fontWeight: 400,
+      fontWeight: 500,
       fontSize: "16px",
-      color: "#828282",
+      fontFamily: "Ubuntu, sans-serif",
+      color: "#4d4e53",
       backgroundColor: "#FEFEFE",
+      borderBottom: "1px solid #dae0e7",
+      paddingLeft: 0,
+    },
+    "& tbody td": {
+      fontWeight: 300,
+      fontSize: "16px",
+      borderBottom: "1px solid #eef1f4",
+    },
+    "& thead  th span": {
+      paddingLeft: 28,
+      borderLeft: "1px solid #e2e7ea",
     },
   },
 }));
@@ -26,7 +38,9 @@ export default function useTable(records, headCells, filterFn) {
   const [orderBy, setOrderBy] = useState("id");
 
   const TblContainer = (props) => (
-    <Table className={classes.table}>{props.children}</Table>
+    <Table stickyHeader aria-label="sticky table" className={classes.table}>
+      {props.children}
+    </Table>
   );
 
   const TblHead = () => {
