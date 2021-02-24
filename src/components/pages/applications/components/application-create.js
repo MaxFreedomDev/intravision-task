@@ -2,6 +2,8 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { ReactComponent as Close } from "../../../../icons/close.svg";
 import { useForm } from "react-hook-form";
+import { useActions } from "../../../../hooks/use-action";
+import moment from "moment";
 
 const styles = () => ({
   header: {
@@ -10,7 +12,7 @@ const styles = () => ({
     justifyContent: "space-between",
     height: 62,
     backgroundColor: "#1a4876",
-    padding: "0 3% 0 4%",
+    padding: "0 40px",
   },
   title: {
     color: "#FFFFFF",
@@ -26,22 +28,14 @@ const styles = () => ({
     flexDirection: "column",
   },
   label: {
-    fontFamily: "Ubuntu, sans-serif",
-    fontSize: 14,
-    color: "#9f9ea7",
     marginBottom: 15,
     marginTop: 20,
   },
   textarea: {
-    fontFamily: "Roboto Light, sans-serif",
-    resize: "none",
     width: "64%",
     border: "1px solid #e8e8e8",
-    borderRadius: 5,
-    outline: "none",
     height: 85,
     padding: 10,
-    fontSize: 14,
   },
   submit: {
     width: 150,
@@ -72,6 +66,7 @@ const styles = () => ({
 });
 
 const ApplicationCreate = ({ classes, setOpen }) => {
+  const { createTask } = useActions();
   const { register, handleSubmit, errors, reset } = useForm({
     defaultValues: {
       name: "",
@@ -79,7 +74,15 @@ const ApplicationCreate = ({ classes, setOpen }) => {
     },
   });
   const onSubmit = (data) => {
-    console.log(data);
+    const resolutionDatePlan = moment(new Date()).add(1, "day").toISOString();
+    const task = {
+      name: data.name,
+      description: data.description,
+      statusId: 50482,
+      priorityId: 42068,
+      resolutionDatePlan,
+    };
+    createTask(task);
     reset();
   };
   return (

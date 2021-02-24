@@ -1,6 +1,7 @@
 const initialState = {
   priorities: [],
   statuses: [],
+  users: [],
   error: null,
 };
 
@@ -11,6 +12,9 @@ export const enumsReducer = (state = initialState, action) => {
     }
     case "STATUSES_REQUEST": {
       return { ...state, statuses: action.payload };
+    }
+    case "USERS_REQUEST": {
+      return { ...state, users: action.payload };
     }
     default:
       return state;

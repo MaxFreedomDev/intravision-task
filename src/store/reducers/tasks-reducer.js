@@ -1,6 +1,7 @@
 const initialState = {
   tasks: [],
-  task: {},
+  task: null,
+  taskId: null,
   error: null,
   loading: false,
 };
@@ -12,6 +13,9 @@ export const tasksReducer = (state = initialState, action) => {
     }
     case "TASK_REQUEST": {
       return { ...state, task: action.payload, loading: false };
+    }
+    case "SET_TASK_ID": {
+      return { ...state, taskId: action.payload, loading: false };
     }
     default:
       return state;

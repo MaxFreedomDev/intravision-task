@@ -3,12 +3,45 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Roboto Light, ", sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 14px;
 }
+body p {
+    font-weight: 500;
+}
+body label {
+    font-family: "Ubuntu,", sans-serif;
+    color: #9f9ea7;
+}
+body textarea {
+    font-family: 'Roboto', sans-serif;
+    resize: none;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+}
+body select {
+    font-family: 'Roboto', sans-serif;
+    background-color: inherit;
+    border: none;
+    outline: none;
+    appearance: none;
+    color: #525460;
+}
+body select:hover {
+    color: #3796f8;
+    cursor: pointer;
+}
+body option {
+    color: #525460;
+}
+
 
 .app {
     display: flex;
-    height: 100vh;
+    height: calc(100vh);
+    overflow-x: hidden;
 }
 .app_content {
     width: calc(100% - 95px);

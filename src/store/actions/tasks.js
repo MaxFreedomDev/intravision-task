@@ -12,6 +12,12 @@ export const taskRequest = (task) => {
     payload: task,
   };
 };
+export const setTaskId = (id) => {
+  return {
+    type: "SET_TASK_ID",
+    payload: id,
+  };
+};
 
 export const getTasks = () => (dispatch) => {
   apiService
@@ -29,6 +35,29 @@ export const getTask = (id) => (dispatch) => {
     .getTaskRequest(id)
     .then((task) => {
       dispatch(taskRequest(task));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const createTask = (payload) => (dispatch) => {
+  apiService
+    .createTask(payload)
+    .then((id) => {
+      dispatch(getTasks);
+      dispatch(setTaskId(id));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+export const updateTask = (payload) => (dispatch) => {
+  apiService
+    .updateTask(payload)
+    .then(() => {
+      dispatch(getTasks);
+      dispatch(getTask(payload.id));
     })
     .catch((err) => {
       console.log(err);

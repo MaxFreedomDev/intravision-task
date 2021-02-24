@@ -3,11 +3,11 @@
     width: 95px;
     height: 100%;
     background-color: #002137;
-    padding-top: 16px;
 }
 .logo {
     display: flex;
     justify-content: center;
+    margin-top: 16px;
 }
 .sidebar_list {
     width: 100%;

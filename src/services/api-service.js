@@ -35,6 +35,9 @@ export default class ApiService {
   getStatusesRequest() {
     return this.getInitializedApi("Statuses", "get");
   }
+  getUsersRequest() {
+    return this.getInitializedApi("Users", "get");
+  }
   getTasksRequest() {
     return this.getInitializedApi(
       "tasks",
@@ -45,5 +48,11 @@ export default class ApiService {
   }
   getTaskRequest(id) {
     return this.getInitializedApi(`Tasks/${id}`, "get");
+  }
+  createTask(payload) {
+    return this.getInitializedApi("Tasks", "post", payload);
+  }
+  updateTask(payload) {
+    return this.getInitializedApi("Tasks", "put", payload);
   }
 }
