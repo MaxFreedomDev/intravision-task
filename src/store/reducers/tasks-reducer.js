@@ -17,6 +17,9 @@ export const tasksReducer = (state = initialState, action) => {
     case "SET_TASK_ID": {
       return { ...state, taskId: action.payload, loading: false };
     }
+    case "SET_ERROR": {
+      return { ...state, error: action.payload };
+    }
     default:
       return state;
   }

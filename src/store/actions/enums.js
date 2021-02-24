@@ -1,4 +1,5 @@
 import { apiService } from "../../index";
+import { setError } from "./tasks";
 
 const prioritiesRequest = (priorities) => {
   return {
@@ -26,7 +27,7 @@ export const getPriorities = () => (dispatch) => {
       dispatch(prioritiesRequest(data));
     })
     .catch((err) => {
-      console.log(err);
+      dispatch(setError(err.response.data.title));
     });
 };
 
@@ -37,7 +38,7 @@ export const getStatuses = () => (dispatch) => {
       dispatch(statusesRequest(data));
     })
     .catch((err) => {
-      console.log(err);
+      dispatch(setError(err.response.data.title));
     });
 };
 export const getUsers = () => (dispatch) => {
@@ -47,6 +48,6 @@ export const getUsers = () => (dispatch) => {
       dispatch(usersRequest(users));
     })
     .catch((err) => {
-      console.log(err);
+      dispatch(setError(err.response.data.title));
     });
 };

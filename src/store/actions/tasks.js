@@ -18,6 +18,12 @@ export const setTaskId = (id) => {
     payload: id,
   };
 };
+export const setError = (error) => {
+  return {
+    type: "SET_ERROR",
+    payload: error,
+  };
+};
 
 export const getTasks = () => (dispatch) => {
   apiService
@@ -26,7 +32,7 @@ export const getTasks = () => (dispatch) => {
       dispatch(tasksRequest(tasks.value));
     })
     .catch((err) => {
-      console.log(err);
+      dispatch(setError(err.response.data.title));
     });
 };
 
@@ -37,7 +43,7 @@ export const getTask = (id) => (dispatch) => {
       dispatch(taskRequest(task));
     })
     .catch((err) => {
-      console.log(err);
+      dispatch(setError(err.response.data.title));
     });
 };
 
@@ -49,7 +55,7 @@ export const createTask = (payload) => (dispatch) => {
       dispatch(setTaskId(id));
     })
     .catch((err) => {
-      console.log(err);
+      dispatch(setError(err.response.data.title));
     });
 };
 export const updateTask = (payload) => (dispatch) => {
@@ -60,6 +66,6 @@ export const updateTask = (payload) => (dispatch) => {
       dispatch(getTask(payload.id));
     })
     .catch((err) => {
-      console.log(err);
+      dispatch(setError(err.response.data.title));
     });
 };

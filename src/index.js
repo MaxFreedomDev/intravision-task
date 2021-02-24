@@ -4,12 +4,15 @@ import App from "./components/app/app";
 import ApiService from "./services/api-service";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import ErrorBoundry from "./components/error-boundry/error-boundry";
 
 export const apiService = new ApiService();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ErrorBoundry>
+      <App />
+    </ErrorBoundry>
   </Provider>,
   document.getElementById("root")
 );
