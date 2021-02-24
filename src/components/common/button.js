@@ -1,7 +1,7 @@
 import React from "react";
 import { Button as MuiButton, makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#008cf0",
     color: "#FFFFFF",
@@ -9,6 +9,10 @@ const useStyles = makeStyles(() => ({
     fontSize: "16px",
     fontFamily: "Ubuntu, sans-serif",
     fontWeight: 300,
+    minWidth: 150,
+    [theme.breakpoints.down("xs")]: {
+      fontSize: 14,
+    },
     "&:hover": {
       backgroundColor: "#3796f8",
     },

@@ -6,6 +6,7 @@ import TableCell from "@material-ui/core/TableCell";
 import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core";
 import TableContainer from "@material-ui/core/TableContainer";
+import Loader from "../../../loader/loader";
 
 const headCells = [
   {
@@ -18,9 +19,12 @@ const headCells = [
   { id: "executorName", disablePadding: false, label: "Исполнитель" },
 ];
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   tableContainer: {
     height: "calc(100% - 151px)",
+    [theme.breakpoints.down("xs")]: {
+      height: "100%",
+    },
   },
   TableRow: {
     "&:hover": {
@@ -62,7 +66,7 @@ const useStyles = makeStyles(() => ({
 
 const ContentTable = ({ setSelectedTask }) => {
   const classes = useStyles();
-  const { tasks } = useSelector((state) => state.tasks);
+  const { tasks, loading } = useSelector((state) => state.tasks);
   const { priorities, statuses } = useSelector((state) => state.enums);
   const [filterFn, setFilterFn] = useState({
     fn: (tasks) => {
@@ -74,6 +78,10 @@ const ContentTable = ({ setSelectedTask }) => {
     headCells,
     filterFn
   );
+
+  if (loading) {
+    return <Loader height="calc(100% - 151px)" />;
+  }
 
   return (
     <TableContainer className={classes.tableContainer}>

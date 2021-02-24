@@ -4,7 +4,7 @@ import { TextField } from "@material-ui/core";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import { ReactComponent as SearchIcon } from "../../../../icons/search.svg";
 
-const styles = () => ({
+const styles = (theme) => ({
   container: {
     display: "flex",
     alignItems: "center",
@@ -13,6 +13,10 @@ const styles = () => ({
     width: "100%",
     backgroundColor: "#d1e0ed",
     boxShadow: "0 3px 7px #e9e9e9",
+    [theme.breakpoints.down("xs")]: {
+      padding: 0,
+      justifyContent: "center",
+    },
   },
   textField: {
     margin: 0,
@@ -27,6 +31,14 @@ const styles = () => ({
     backgroundColor: "#ffffff",
     fontSize: 16,
     fontFamily: "Roboto Regular",
+    [theme.breakpoints.down("sm")]: {
+      width: 380,
+      fontSize: 14,
+    },
+    [theme.breakpoints.down("xs")]: {
+      width: 200,
+      fontSize: 14,
+    },
     "&:hover": {
       cursor: "pointer",
       boxShadow: "0 0 7px #42aaff",

@@ -1,5 +1,10 @@
 import { apiService } from "../../index";
 
+export const tasksLoading = () => {
+  return {
+    type: "TASKS_LOADING",
+  };
+};
 export const tasksRequest = (tasks) => {
   return {
     type: "TASKS_REQUEST",
@@ -26,6 +31,7 @@ export const setError = (error) => {
 };
 
 export const getTasks = () => (dispatch) => {
+  dispatch(tasksLoading());
   apiService
     .getTasksRequest()
     .then((tasks) => {

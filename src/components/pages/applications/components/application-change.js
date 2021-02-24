@@ -12,7 +12,7 @@ import "moment/locale/ru";
 import Loader from "../../../loader/loader";
 moment.locale("ru");
 
-const styles = () => ({
+const styles = (theme) => ({
   header: {
     display: "flex",
     alignItems: "center",
@@ -45,6 +45,9 @@ const styles = () => ({
   content: {
     display: "flex",
     height: "calc(100% - 62px)",
+    [theme.breakpoints.down("xs")]: {
+      flexDirection: "column",
+    },
   },
   leftContent: {
     display: "flex",
@@ -52,6 +55,10 @@ const styles = () => ({
     width: "75%",
     marginTop: 30,
     padding: "0 4%",
+    [theme.breakpoints.down("xs")]: {
+      width: "90%",
+      alignItems: "center",
+    },
   },
   rightContent: {
     display: "flex",
@@ -60,12 +67,20 @@ const styles = () => ({
     borderLeft: "1px solid #d7dce0",
     paddingLeft: "2.6%",
     marginTop: 30,
+    [theme.breakpoints.down("xs")]: {
+      padding: 0,
+      alignItems: "center",
+      width: "100%",
+    },
   },
   textarea: {
     marginTop: "35px",
     border: "none",
     height: 75,
     backgroundColor: "inherit",
+    [theme.breakpoints.down("xs")]: {
+      width: "100%",
+    },
     "&:hover": {
       cursor: "pointer",
       backgroundColor: "#F2F7F9",
@@ -81,6 +96,12 @@ const styles = () => ({
     height: 400,
     overflowY: "auto",
     overflowX: "hidden",
+    [theme.breakpoints.down("xs")]: {
+      height: 250,
+      border: "1px solid #c6ced4",
+      padding: 5,
+      borderRadius: 10,
+    },
   },
   commentContainer: {
     display: "flex",
@@ -121,6 +142,9 @@ const styles = () => ({
     marginTop: 15,
     height: 300,
     overflowY: "auto",
+    [theme.breakpoints.down("xs")]: {
+      height: 150,
+    },
   },
   tag: {
     backgroundColor: "#FFFFFF",
@@ -145,6 +169,11 @@ const styles = () => ({
   },
   error: {
     color: "red",
+  },
+  selectStatus: {
+    [theme.breakpoints.down("xs")]: {
+      width: "30%",
+    },
   },
 });
 
@@ -254,7 +283,12 @@ const ApplicationChange = ({
           </div>
         </div>
         <div className={classes.rightContent}>
-          <Box display="flex" alignItems="center" mb={5}>
+          <Box
+            display="flex"
+            alignItems="center"
+            mb={5}
+            className={classes.selectStatus}
+          >
             <span
               className={classes.dot}
               style={{ backgroundColor: `${task.statusRgb}` }}

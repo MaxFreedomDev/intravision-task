@@ -1,9 +1,9 @@
 import React from "react";
 import "./loader.css";
 
-const Loader = () => {
+const Loader = ({ height }) => {
   return (
-    <div className="loaderWrapper">
+    <div className="loaderWrapper" style={height && { height: height }}>
       <div className="loader" />
     </div>
   );

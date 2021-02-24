@@ -17,3 +17,16 @@
     overflow: hidden;
     z-index: 100;
 }
+@media (max-width: 600px){
+    .button {
+        padding: 15px 0;
+        justify-content: center;
+    }
+    .drawer {
+        width: 100%;
+        height: 100%;
+        top: 50px;
+        overflow: auto;
+        padding-bottom: 20px;
+    }
+}

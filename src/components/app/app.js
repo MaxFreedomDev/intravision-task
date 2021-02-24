@@ -9,10 +9,9 @@ function App() {
   return (
     <div className="app">
       <BrowserRouter>
-        <Sidebar />
-        <div className="app_content">
+        <Sidebar>
           <AppRouter />
-        </div>
+        </Sidebar>
       </BrowserRouter>
     </div>
   );
