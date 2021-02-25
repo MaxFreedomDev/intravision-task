@@ -21,22 +21,6 @@ body textarea {
     outline: none;
     font-size: 14px;
 }
-body select {
-    font-family: 'Roboto', sans-serif;
-    background-color: inherit;
-    border: none;
-    outline: none;
-    appearance: none;
-    color: #525460;
-}
-body select:hover {
-    color: #3796f8;
-    cursor: pointer;
-}
-body option {
-    color: #525460;
-}
-
 
 .app {
     display: flex;

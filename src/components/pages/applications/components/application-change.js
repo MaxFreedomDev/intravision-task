@@ -10,6 +10,8 @@ import { ReactComponent as Calendar } from "../../../../icons/calendar.svg";
 import moment from "moment";
 import "moment/locale/ru";
 import Loader from "../../../loader/loader";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 moment.locale("ru");
 
 const styles = (theme) => ({
@@ -68,10 +70,9 @@ const styles = (theme) => ({
     paddingLeft: "2.6%",
     marginTop: 30,
     [theme.breakpoints.down("xs")]: {
-      padding: 0,
-      alignItems: "center",
       width: "100%",
       border: "none",
+      paddingLeft: 15,
     },
   },
   textarea: {
@@ -136,6 +137,7 @@ const styles = (theme) => ({
     minWidth: 11,
     borderRadius: "50%",
     marginRight: 10,
+    marginBottom: 4,
   },
   tags: {
     display: "flex",
@@ -176,6 +178,18 @@ const styles = (theme) => ({
       width: "30%",
     },
   },
+  select: {
+    fontFamily: "Roboto",
+    fontSize: 14,
+    fontWeight: 400,
+    color: "#5c5f6a",
+    "&:hover": {
+      color: "#3796f8",
+    },
+  },
+  icon: {
+    display: "none",
+  },
 });
 
 const ApplicationChange = ({
@@ -201,7 +215,7 @@ const ApplicationChange = ({
   };
 
   const changeStatus = (value) => {
-    const status = statuses.find((el) => el.name === value);
+    const status = statuses.find((el) => el.name === value.target.value);
     const newStatus = {
       statusId: status.id,
       statusName: status.name,
@@ -211,7 +225,7 @@ const ApplicationChange = ({
     updateTask(newTask);
   };
   const changeExecutor = (value) => {
-    const executor = users.find((el) => el.name === value);
+    const executor = users.find((el) => el.name === value.target.value);
     const newExecutor = {
       executorId: executor.id,
       executorName: executor.name,
@@ -295,15 +309,23 @@ const ApplicationChange = ({
               className={classes.dot}
               style={{ backgroundColor: `${task.statusRgb}` }}
             />
-            <select
-              defaultValue={task.statusName}
+            <Select
               className={classes.select}
-              onChange={(e) => changeStatus(e.target.value)}
+              value={task.statusName}
+              onChange={changeStatus}
+              disableUnderline
+              inputProps={{
+                classes: {
+                  icon: classes.icon,
+                },
+              }}
             >
               {statuses.map((item) => (
-                <option key={item.id}>{item.name}</option>
+                <MenuItem key={item.id} value={item.name}>
+                  {item.name}
+                </MenuItem>
               ))}
-            </select>
+            </Select>
           </Box>
           <label className={classes.label}>Заявитель</label>
           <span style={{ marginBottom: 50 }}>{task.initiatorName}</span>
@@ -311,16 +333,27 @@ const ApplicationChange = ({
           <span className={classes.item}>
             {moment(task.createdAt).format("DD.MM.YYYY г.")}
           </span>
-          <label className={classes.label}>Исполнитель</label>
-          <select
-            defaultValue={task.executorName}
-            className={classes.selectUser}
-            onChange={(e) => changeExecutor(e.target.value)}
+          <label className={classes.label} style={{ marginBottom: 4 }}>
+            Исполнитель
+          </label>
+          <Select
+            className={classes.select}
+            style={{ marginBottom: 24, color: "#3585d7" }}
+            value={task.executorName}
+            onChange={changeExecutor}
+            disableUnderline
+            inputProps={{
+              classes: {
+                icon: classes.icon,
+              },
+            }}
           >
             {users.map((item) => (
-              <option key={item.id}>{item.name}</option>
+              <MenuItem key={item.id} value={item.name}>
+                {item.name}
+              </MenuItem>
             ))}
-          </select>
+          </Select>
           <label className={classes.label}>Приоритет</label>
           <span className={classes.item}>{task.priorityName}</span>
           <label className={classes.label}>Срок</label>

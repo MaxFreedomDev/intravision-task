@@ -30,7 +30,7 @@ const styles = (theme) => ({
     outline: "none",
     backgroundColor: "#ffffff",
     fontSize: 16,
-    fontFamily: "Roboto Regular",
+    fontFamily: "Roboto",
     [theme.breakpoints.down("sm")]: {
       width: 380,
       fontSize: 14,
