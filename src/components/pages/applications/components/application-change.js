@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { ReactComponent as Close } from "../../../../icons/close.svg";
 import { useActions } from "../../../../hooks/use-action";
 import { useSelector } from "react-redux";
 import Button from "../../../common/button";
+import Select from "../../../common/select";
 import Avatar from "@material-ui/core/Avatar";
 import Box from "@material-ui/core/Box";
 import { ReactComponent as Calendar } from "../../../../icons/calendar.svg";
 import moment from "moment";
 import "moment/locale/ru";
 import Loader from "../../../loader/loader";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 moment.locale("ru");
 
 const styles = (theme) => ({
@@ -178,18 +177,6 @@ const styles = (theme) => ({
       width: "30%",
     },
   },
-  select: {
-    fontFamily: "Roboto",
-    fontSize: 14,
-    fontWeight: 400,
-    color: "#5c5f6a",
-    "&:hover": {
-      color: "#3796f8",
-    },
-  },
-  icon: {
-    display: "none",
-  },
 });
 
 const ApplicationChange = ({
@@ -204,9 +191,13 @@ const ApplicationChange = ({
   const [comment, setComment] = useState("");
   const [error, setError] = useState(false);
 
-  useEffect(() => {
+  const memoizedInitialRequest = useCallback(() => {
     getTask(selectedTask);
   }, [selectedTask]);
+
+  useEffect(() => {
+    memoizedInitialRequest();
+  }, []);
 
   const onClose = () => {
     setSelectedTask(null);
@@ -310,22 +301,10 @@ const ApplicationChange = ({
               style={{ backgroundColor: `${task.statusRgb}` }}
             />
             <Select
-              className={classes.select}
               value={task.statusName}
               onChange={changeStatus}
-              disableUnderline
-              inputProps={{
-                classes: {
-                  icon: classes.icon,
-                },
-              }}
-            >
-              {statuses.map((item) => (
-                <MenuItem key={item.id} value={item.name}>
-                  {item.name}
-                </MenuItem>
-              ))}
-            </Select>
+              data={statuses}
+            />
           </Box>
           <label className={classes.label}>Заявитель</label>
           <span style={{ marginBottom: 50 }}>{task.initiatorName}</span>
@@ -337,23 +316,11 @@ const ApplicationChange = ({
             Исполнитель
           </label>
           <Select
-            className={classes.select}
-            style={{ marginBottom: 24, color: "#3585d7" }}
             value={task.executorName}
             onChange={changeExecutor}
-            disableUnderline
-            inputProps={{
-              classes: {
-                icon: classes.icon,
-              },
-            }}
-          >
-            {users.map((item) => (
-              <MenuItem key={item.id} value={item.name}>
-                {item.name}
-              </MenuItem>
-            ))}
-          </Select>
+            data={users}
+            style={{ marginBottom: 24, color: "#3585d7" }}
+          />
           <label className={classes.label}>Приоритет</label>
           <span className={classes.item}>{task.priorityName}</span>
           <label className={classes.label}>Срок</label>
