@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { ReactComponent as Close } from "../../../../icons/close.svg";
 import { useActions } from "../../../../hooks/use-action";
@@ -191,13 +191,9 @@ const ApplicationChange = ({
   const [comment, setComment] = useState("");
   const [error, setError] = useState(false);
 
-  const memoizedInitialRequest = useCallback(() => {
+  useEffect(() => {
     getTask(selectedTask);
   }, [selectedTask]);
-
-  useEffect(() => {
-    memoizedInitialRequest();
-  }, []);
 
   const onClose = () => {
     setSelectedTask(null);

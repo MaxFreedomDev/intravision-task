@@ -64,15 +64,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const statusColor = (statuses, status) => {
+  return statuses.find((item) => item.id === status).rgb;
+};
+
 const ContentTable = ({ setSelectedTask }) => {
   const classes = useStyles();
   const { tasks, loading } = useSelector((state) => state.tasks);
-  const { priorities, statuses } = useSelector((state) => state.enums);
+  const { statuses } = useSelector((state) => state.enums);
   const [filterFn, setFilterFn] = useState({
     fn: (tasks) => {
       return tasks;
     },
   });
+
   const { TblContainer, TblHead, recordsAfterPagingAndSorting } = useTable(
     tasks,
     headCells,
@@ -100,9 +105,7 @@ const ContentTable = ({ setSelectedTask }) => {
                   <span
                     className={classes.priority}
                     style={{
-                      backgroundColor: priorities.find(
-                        (item) => item.id === row.priorityId
-                      ).rgb,
+                      backgroundColor: statusColor(statuses, row.statusId),
                     }}
                   />
                   {row.id}
@@ -115,9 +118,7 @@ const ContentTable = ({ setSelectedTask }) => {
                 <div
                   className={classes.statusName}
                   style={{
-                    backgroundColor: statuses.find(
-                      (item) => item.id === row.statusId
-                    ).rgb,
+                    backgroundColor: statusColor(statuses, row.statusId),
                   }}
                 >
                   {row.statusName}

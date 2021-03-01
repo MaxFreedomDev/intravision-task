@@ -42,6 +42,9 @@ const Applications = () => {
     }
   }, [taskId]);
 
+  console.log(taskId);
+  console.log(selectedTask);
+
   return (
     <div style={{ height: "100%" }}>
       <SearchPanel />
