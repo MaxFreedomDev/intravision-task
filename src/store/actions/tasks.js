@@ -72,6 +72,6 @@ export const updateTask = (payload) => (dispatch) => {
       dispatch(getTasks());
     })
     .catch((err) => {
-      dispatch(setError(err.response.data.title));
+      dispatch(setError(err.response.data.title || err.response.data));
     });
 };
