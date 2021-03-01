@@ -268,25 +268,25 @@ const ApplicationChange = ({
           />
           {task.lifetimeItems.length > 0 && (
             <div className={classes.commentsWrapper}>
-              {task.lifetimeItems.map((item) =>
-                item.comment !== null ? (
-                  <Box display="flex" key={item.id} mt={1}>
-                    <Avatar />
-                    <div className={classes.commentContainer}>
-                      <span className={classes.commentItemName}>
-                        {item.userName}
-                      </span>
-                      <span className={classes.commentItemDate}>
-                        {moment(item.createdAt).format("DD MMMM, HH:mm ")}
-                        прокомментировал
-                      </span>
-                      {item.comment && (
-                        <p className={classes.comment}>{item.comment}</p>
-                      )}
-                    </div>
-                  </Box>
-                ) : null
-              )}
+              {task.lifetimeItems.map((item) => (
+                <Box display="flex" key={item.id} mt={1}>
+                  <Avatar />
+                  <div className={classes.commentContainer}>
+                    <span className={classes.commentItemName}>
+                      {item.userName}
+                    </span>
+                    <span className={classes.commentItemDate}>
+                      {moment(item.createdAt).format("DD MMMM, HH:mm ")}
+                      {item.comment !== null
+                        ? "прокомментировал"
+                        : `изменил "${item.fieldName}"  с  "${item.oldFieldValue}"  на  "${item.newFieldValue}"`}
+                    </span>
+                    {item.comment && (
+                      <p className={classes.comment}>{item.comment}</p>
+                    )}
+                  </div>
+                </Box>
+              ))}
             </div>
           )}
         </div>
