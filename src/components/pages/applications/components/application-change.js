@@ -11,6 +11,7 @@ import { ReactComponent as Calendar } from "../../../../icons/calendar.svg";
 import moment from "moment";
 import "moment/locale/ru";
 import Loader from "../../../loader/loader";
+import TextField from "@material-ui/core/TextField";
 moment.locale("ru");
 
 const styles = (theme) => ({
@@ -76,14 +77,12 @@ const styles = (theme) => ({
   },
   textarea: {
     marginTop: "35px",
-    border: "none",
-    height: 75,
     backgroundColor: "inherit",
+    cursor: "pointer",
     [theme.breakpoints.down("xs")]: {
       width: "100%",
     },
     "&:hover": {
-      cursor: "pointer",
       backgroundColor: "#F2F7F9",
     },
   },
@@ -170,6 +169,7 @@ const styles = (theme) => ({
     color: "#1974d2",
   },
   error: {
+    marginTop: 5,
     color: "red",
   },
   selectStatus: {
@@ -248,9 +248,12 @@ const ApplicationChange = ({
         <div className={classes.leftContent}>
           <label>Описание</label>
           <p>{task.description}</p>
-          <textarea
+          <TextField
+            variant={"outlined"}
+            multiline
+            rows={2}
             className={classes.textarea}
-            placeholder="Добавление комментариев"
+            label="Добавление комментариев"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
             onBlur={() => setError(false)}
