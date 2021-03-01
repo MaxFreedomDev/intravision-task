@@ -31,15 +31,15 @@ body textarea {
 /*Scroll*/
 @media (min-width: 600px){
     *::-webkit-scrollbar {
-        width: 12px;
+        width: 8px;
     }
     *::-webkit-scrollbar-track {
-        background: white;
+        background: inherit;
     }
     *::-webkit-scrollbar-thumb {
         background-color: #e0e0dc;
         border-radius: 20px;
-        border: 3px solid white;
+        border: 3px solid inherit;
     }
     *::-webkit-scrollbar-thumb:active{
         background-color: #d4d4cd;

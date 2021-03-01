@@ -83,6 +83,9 @@ const styles = (theme) => ({
       width: "100%",
     },
   },
+  notchedOutline: {
+    borderColor: "#d7dce0",
+  },
   btn: {
     width: 150,
     height: 36,
@@ -250,6 +253,11 @@ const ApplicationChange = ({
             multiline
             rows={2}
             className={classes.textarea}
+            InputProps={{
+              classes: {
+                notchedOutline: classes.notchedOutline,
+              },
+            }}
             label="Добавление комментариев"
             value={comment}
             onChange={(e) => setComment(e.target.value)}
