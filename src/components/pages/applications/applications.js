@@ -9,6 +9,12 @@ import { useSelector } from "react-redux";
 
 import styles from "./applications.module.css";
 
+const btnWrapperStyle = (open, selectedTask) => {
+  if (open || selectedTask) {
+    return { padding: "23px 0", justifyContent: "center", width: "40%" };
+  } else return {};
+};
+
 const Applications = () => {
   const { getPriorities, getStatuses, getTasks, getUsers } = useActions();
   const { statuses, users } = useSelector((state) => state.enums);
@@ -45,16 +51,23 @@ const Applications = () => {
   return (
     <div style={{ height: "100%" }}>
       <SearchPanel />
-      <div className={styles.button}>
+      <div
+        className={styles.button}
+        style={btnWrapperStyle(open, selectedTask)}
+      >
         <Button text="Создать заявку" onClick={selectCreate} />
       </div>
-      <ContentTable setSelectedTask={selectChange} />
-      {(open || selectedTask || taskId) && (
+      <ContentTable
+        setSelectedTask={selectChange}
+        selectedTask={selectedTask}
+        open={open}
+      />
+      {(open || selectedTask) && (
         <div className={styles.drawer}>
           {open && <ApplicationCreate setOpen={setOpen} />}
           {(selectedTask || taskId) && (
             <ApplicationChange
-              selectedTask={selectedTask || taskId}
+              selectedTask={selectedTask}
               setSelectedTask={setSelectedTask}
               statuses={statuses}
               users={users}

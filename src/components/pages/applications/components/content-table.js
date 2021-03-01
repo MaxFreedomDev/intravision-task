@@ -68,7 +68,7 @@ const statusColor = (statuses, status) => {
   return statuses.find((item) => item.id === status).rgb;
 };
 
-const ContentTable = ({ setSelectedTask }) => {
+const ContentTable = ({ setSelectedTask, selectedTask, open }) => {
   const classes = useStyles();
   const { tasks, loading } = useSelector((state) => state.tasks);
   const { statuses } = useSelector((state) => state.enums);
@@ -89,7 +89,10 @@ const ContentTable = ({ setSelectedTask }) => {
   }
 
   return (
-    <TableContainer className={classes.tableContainer}>
+    <TableContainer
+      className={classes.tableContainer}
+      style={{ width: open || selectedTask ? "39%" : "auto" }}
+    >
       <TblContainer>
         <TblHead />
         <TableBody>
