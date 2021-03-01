@@ -11,12 +11,18 @@ import styles from "./applications.module.css";
 
 const btnWrapperStyle = (open, selectedTask) => {
   if (open || selectedTask) {
-    return { padding: "23px 0", justifyContent: "center", width: "40%" };
+    return { padding: "23px 0", justifyContent: "center", width: "30%" };
   } else return {};
 };
 
 const Applications = () => {
-  const { getPriorities, getStatuses, getTasks, getUsers } = useActions();
+  const {
+    getPriorities,
+    getStatuses,
+    getTasks,
+    getUsers,
+    taskRequest,
+  } = useActions();
   const { statuses, users } = useSelector((state) => state.enums);
   const { taskId } = useSelector((state) => state.tasks);
   const [selectedTask, setSelectedTask] = useState(null);
@@ -25,8 +31,10 @@ const Applications = () => {
   const selectCreate = () => {
     setOpen(true);
     setSelectedTask(null);
+    taskRequest(null);
   };
   const selectChange = (id) => {
+    taskRequest(null);
     setOpen(false);
     setSelectedTask(id);
   };

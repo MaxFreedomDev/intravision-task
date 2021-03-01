@@ -91,7 +91,7 @@ const ContentTable = ({ setSelectedTask, selectedTask, open }) => {
   return (
     <TableContainer
       className={classes.tableContainer}
-      style={{ width: open || selectedTask ? "39%" : "auto" }}
+      style={{ width: open || selectedTask ? "37%" : "auto" }}
     >
       <TblContainer>
         <TblHead />

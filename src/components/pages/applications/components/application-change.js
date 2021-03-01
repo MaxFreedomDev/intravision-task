@@ -77,13 +77,10 @@ const styles = (theme) => ({
   },
   textarea: {
     marginTop: "35px",
-    backgroundColor: "inherit",
+    backgroundColor: "#F2F7F9",
     cursor: "pointer",
     [theme.breakpoints.down("xs")]: {
       width: "100%",
-    },
-    "&:hover": {
-      backgroundColor: "#F2F7F9",
     },
   },
   btn: {

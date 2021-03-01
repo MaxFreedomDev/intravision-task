@@ -12,6 +12,9 @@ const useStyles = makeStyles(() => ({
       color: "#3796f8",
     },
   },
+  selectMenu: {
+    whiteSpace: "pre-wrap",
+  },
   icon: {
     display: "none",
   },
@@ -33,6 +36,7 @@ export default function Select({ value, data, onChange, style }) {
       inputProps={{
         classes: {
           icon: classes.icon,
+          selectMenu: classes.selectMenu,
         },
       }}
     >
