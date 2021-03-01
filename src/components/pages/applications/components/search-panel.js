@@ -8,7 +8,6 @@ const styles = (theme) => ({
   container: {
     display: "flex",
     alignItems: "center",
-    paddingLeft: 17,
     height: 65,
     width: "100%",
     backgroundColor: "#d1e0ed",
@@ -23,6 +22,7 @@ const styles = (theme) => ({
     border: "none",
   },
   input: {
+    marginLeft: 17,
     height: 40,
     width: 680,
     borderRadius: 20,

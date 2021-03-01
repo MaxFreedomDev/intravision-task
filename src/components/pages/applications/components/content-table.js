@@ -61,6 +61,7 @@ const useStyles = makeStyles((theme) => ({
     width: 5,
     height: 40,
     marginRight: 20,
+    borderRadius: 20,
   },
 }));
 
@@ -91,7 +92,7 @@ const ContentTable = ({ setSelectedTask, selectedTask, open }) => {
   return (
     <TableContainer
       className={classes.tableContainer}
-      style={{ width: open || selectedTask ? "38%" : "auto" }}
+      style={{ width: open || selectedTask ? "calc(40% - 58px)" : "auto" }}
     >
       <TblContainer>
         <TblHead />

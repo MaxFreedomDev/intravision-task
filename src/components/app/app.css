@@ -24,7 +24,7 @@ body textarea {
 
 .app {
     display: flex;
-    height: calc(100vh);
+    height: 100vh;
 }
 
 
@@ -32,17 +32,18 @@ body textarea {
 @media (min-width: 600px){
     *::-webkit-scrollbar {
         width: 8px;
+        height: 10px;
+        background-color: inherit;
     }
     *::-webkit-scrollbar-track {
-        background: inherit;
+        background-color: inherit;
     }
     *::-webkit-scrollbar-thumb {
-        background-color: #e0e0dc;
-        border-radius: 20px;
-        border: 3px solid inherit;
+        border-radius: 8px;
+        background-color: #d4d4d4;
     }
-    *::-webkit-scrollbar-thumb:active{
-        background-color: #d4d4cd;
+    *::-webkit-scrollbar-thumb:hover{
+        background-color: #7c7c7c;
     }
 }
 
