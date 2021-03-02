@@ -34,7 +34,6 @@ const Applications = () => {
     taskRequest(null);
   };
   const selectChange = (id) => {
-    taskRequest(null);
     setOpen(false);
     setSelectedTask(id);
   };
@@ -70,12 +69,12 @@ const Applications = () => {
         selectedTask={selectedTask}
         open={open}
       />
-      {(open || selectedTask) && (
+      {(open || selectedTask || taskId) && (
         <div className={styles.drawer}>
           {open && <ApplicationCreate setOpen={setOpen} />}
           {(selectedTask || taskId) && (
             <ApplicationChange
-              selectedTask={selectedTask}
+              selectedTask={selectedTask || taskId}
               setSelectedTask={setSelectedTask}
               statuses={statuses}
               users={users}

@@ -57,7 +57,7 @@ export const createTask = (payload) => (dispatch) => {
   apiService
     .createTask(payload)
     .then((id) => {
-      dispatch(getTasks);
+      dispatch(getTasks());
       dispatch(setTaskId(id));
     })
     .catch((err) => {

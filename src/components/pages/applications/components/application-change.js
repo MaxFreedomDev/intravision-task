@@ -231,6 +231,8 @@ const ApplicationChange = ({
     }
   };
 
+  console.log(task);
+
   if (!task) {
     return <Loader />;
   }
