@@ -56,7 +56,7 @@ const Applications = () => {
   }, [taskId]);
 
   return (
-    <div style={{ height: "100%" }}>
+    <div style={{ height: "100%", overflow: "auto" }}>
       <SearchPanel />
       <div
         className={styles.button}

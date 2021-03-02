@@ -14,9 +14,17 @@
     right: 0;
     height: calc(100% - 65px);
     width: 60%;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     z-index: 100;
 }
+.drawer ::-webkit-scrollbar {
+    width: 8px;
+    height: 10px;
+    background-color: inherit;
+}
+
+
 @media (max-width: 600px){
     .button {
         padding: 15px 0;

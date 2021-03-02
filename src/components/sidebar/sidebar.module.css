@@ -11,6 +11,13 @@
     width: 95px;
     height: 100%;
     background-color: #002137;
+    overflow: auto;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+    background-color: inherit;
 }
 .logo {
     display: flex;

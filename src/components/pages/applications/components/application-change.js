@@ -64,6 +64,9 @@ const styles = (theme) => ({
   },
   rightContent: {
     display: "flex",
+    height: "max-content",
+    overflowY: "auto",
+    overflowX: "hidden",
     flexDirection: "column",
     width: "25%",
     borderLeft: "1px solid #d7dce0",
@@ -93,9 +96,10 @@ const styles = (theme) => ({
     marginTop: 25,
   },
   commentsWrapper: {
-    height: 400,
     overflowY: "auto",
     overflowX: "hidden",
+    minHeight: "200px",
+    marginBottom: 10,
     [theme.breakpoints.down("xs")]: {
       height: 250,
       border: "1px solid #c6ced4",
@@ -141,10 +145,20 @@ const styles = (theme) => ({
     display: "flex",
     flexDirection: "column",
     marginTop: 15,
-    height: 300,
+    marginBottom: 30,
+    maxHeight: 200,
     overflowY: "auto",
     [theme.breakpoints.down("xs")]: {
-      height: 150,
+      maxHeight: 150,
+    },
+  },
+  history: {
+    marginTop: 15,
+    maxHeight: 200,
+    width: "90%",
+    overflowY: "auto",
+    [theme.breakpoints.down("xs")]: {
+      maxHeight: 150,
     },
   },
   tag: {
@@ -231,8 +245,6 @@ const ApplicationChange = ({
     }
   };
 
-  console.log(task);
-
   if (!task) {
     return <Loader />;
   }
@@ -275,25 +287,25 @@ const ApplicationChange = ({
           />
           {task.lifetimeItems.length > 0 && (
             <div className={classes.commentsWrapper}>
-              {task.lifetimeItems.map((item) => (
-                <Box display="flex" key={item.id} mt={1}>
-                  <Avatar />
-                  <div className={classes.commentContainer}>
-                    <span className={classes.commentItemName}>
-                      {item.userName}
-                    </span>
-                    <span className={classes.commentItemDate}>
-                      {moment(item.createdAt).format("DD MMMM, HH:mm ")}
-                      {item.comment !== null
-                        ? "прокомментировал"
-                        : `изменил "${item.fieldName}"  с  "${item.oldFieldValue}"  на  "${item.newFieldValue}"`}
-                    </span>
-                    {item.comment && (
-                      <p className={classes.comment}>{item.comment}</p>
-                    )}
-                  </div>
-                </Box>
-              ))}
+              {task.lifetimeItems.map((item) =>
+                item.comment !== null ? (
+                  <Box display="flex" key={item.id} mt={1}>
+                    <Avatar />
+                    <div className={classes.commentContainer}>
+                      <span className={classes.commentItemName}>
+                        {item.userName}
+                      </span>
+                      <span className={classes.commentItemDate}>
+                        {moment(item.createdAt).format("DD MMMM, HH:mm ")}
+                        прокомментировал
+                      </span>
+                      {item.comment && (
+                        <p className={classes.comment}>{item.comment}</p>
+                      )}
+                    </div>
+                  </Box>
+                ) : null
+              )}
             </div>
           )}
         </div>
@@ -332,18 +344,48 @@ const ApplicationChange = ({
           <label className={classes.label}>Приоритет</label>
           <span className={classes.item}>{task.priorityName}</span>
           <label className={classes.label}>Срок</label>
-          <span className={classes.item}>
-            <Calendar />{" "}
-            {moment(task.resolutionDatePlan).format("DD.MM.YYYY г.")}
-          </span>
-          <label>Теги</label>
-          <div className={classes.tags}>
-            {task.tags.map((item) => (
-              <div key={item.id} className={classes.tag}>
-                {item.name}
+          {task.resolutionDatePlan !== null ? (
+            <span className={classes.item}>
+              <Calendar />{" "}
+              {moment(task.resolutionDatePlan).format("DD.MM.YYYY г.")}
+            </span>
+          ) : (
+            "Не назначен"
+          )}
+          {task.tags.length > 0 ? (
+            <>
+              <label>Теги</label>
+              <div className={classes.tags}>
+                {task.tags.map((item) => (
+                  <div key={item.id} className={classes.tag}>
+                    {item.name}
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </>
+          ) : null}
+          {task.lifetimeItems.length > 0 &&
+          task.lifetimeItems.find((el) => el.comment === null) ? (
+            <>
+              <label>История изменений</label>
+              <div className={classes.history}>
+                {task.lifetimeItems
+                  .filter((el) => el.comment === null)
+                  .map((item) => (
+                    <div
+                      key={item.id}
+                      style={{ fontSize: 12, marginBottom: 8, width: "80%" }}
+                    >
+                      {`${moment(item.createdAt).format(
+                        "DD.MM.YYYY HH:mm -"
+                      )} ${item.fieldName} изменен с "${
+                        item.oldFieldValue
+                      }" на "${item.newFieldValue}"`}
+                    </div>
+                  ))}
+              </div>
+            </>
+          ) : null}
         </div>
       </div>
     </>
